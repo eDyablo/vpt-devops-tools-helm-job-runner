@@ -4,7 +4,7 @@ FROM ${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}alpine
 
 ENV \
 	KUBECTL_VERSION=v1.28.0 \
-  HELM_VERSION=v3.11.2
+  HELM_VERSION=v3.12.3
 
 RUN \
 	echo "Installing basic tooling" \
