@@ -12,6 +12,7 @@ RUN \
 			bash \
 			curl \
 			git \
+			jq \
 			openssl \
 	&& OS_NAME=$(uname -o | tr '[:upper:]' '[:lower:]') \
     && ARCH_NAME=$(uname -m) \
