@@ -18,12 +18,12 @@ RUN \
     && ARCH_NAME=$(uname -m) \
       && ARCH_NAME=${ARCH_NAME/aarch64/arm64} \
       && ARCH_NAME=${ARCH_NAME/x86_64/amd64} \
-	&& echo "Installing kubectl version ${KUBECTL_VERSION}" \
+	&& echo "Installing kubectl version ${KUBECTL_VERSION##v}" \
 		&& curl -fL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/${OS_NAME}/${ARCH_NAME}/kubectl \
 			--output /usr/local/bin/kubectl \
 			--no-progress-meter \
 		&& chmod +x /usr/local/bin/kubectl \
-	&& echo "Installing helm version ${HELM_VERSION}" \
+	&& echo "Installing helm version ${HELM_VERSION##v}" \
 		&& curl -fSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
 			--output get_helm.sh \
 			--no-progress-meter \
