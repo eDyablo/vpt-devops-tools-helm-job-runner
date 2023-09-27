@@ -9,6 +9,7 @@ ENV \
 RUN \
 	echo "Installing basic tooling" \
 		&& apk add --update --no-cache \
+			aws-cli \
 			bash \
 			curl \
 			git \
