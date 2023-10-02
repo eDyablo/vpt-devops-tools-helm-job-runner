@@ -4,6 +4,7 @@ FROM ${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}alpine
 
 ENV \
 	KUBECTL_VERSION=v1.28.0 \
+	KUSTOMIZE_VERSION=5.1.1 \
   HELM_VERSION=v3.12.3
 
 RUN \
@@ -29,6 +30,10 @@ RUN \
 			--output get_helm.sh \
 			--no-progress-meter \
 		&& chmod 700 get_helm.sh \
-		&& ./get_helm.sh --version ${HELM_VERSION}
+		&& ./get_helm.sh --version ${HELM_VERSION##v} \
+	&& echo "Installing kustomize version ${KUSTOMIZE_VERSION}" \
+		&& curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" \
+			| bash -s - ${KUSTOMIZE_VERSION} \
+		&& mv ./kustomize /usr/local/bin
 
 WORKDIR /var/workspace
