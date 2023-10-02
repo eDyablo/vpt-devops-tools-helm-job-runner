@@ -31,7 +31,7 @@ RUN \
 			--no-progress-meter \
 		&& chmod 700 get_helm.sh \
 		&& ./get_helm.sh --version ${HELM_VERSION##v} \
-	&& echo "Installing kustomize version ${KUSTOMIZE_VERSION}" \
+	&& echo "Installing kustomize version ${KUSTOMIZE_VERSION##v}" \
 		&& curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" \
 			| bash -s - ${KUSTOMIZE_VERSION} \
 		&& mv ./kustomize /usr/local/bin
