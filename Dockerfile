@@ -3,9 +3,9 @@ ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}alpine
 
 ENV \
+  HELM_VERSION=v3.12.3 \
   KUBECTL_VERSION=v1.28.0 \
-  KUSTOMIZE_VERSION=5.1.1 \
-  HELM_VERSION=v3.12.3
+  KUSTOMIZE_VERSION=5.1.1
 
 RUN \
   echo "Installing basic tooling" \
@@ -43,5 +43,13 @@ RUN addgroup -S ${CONTAINER_USER_GROUP} \
   && adduser -S ${CONTAINER_USER} -G ${CONTAINER_USER_GROUP}
 
 USER ${CONTAINER_USER}:${CONTAINER_USER_GROUP}
+
+ENV \
+  HELM_DIFF_VERSION=latest
+
+RUN \
+  echo "Installing diff helm plugin version ${HELM_DIFF_VERSION:-latest}" \
+    && helm plugin install https://github.com/databus23/helm-diff \
+      --version=${HELM_DIFF_VERSION##latest}
 
 WORKDIR /var/workspace
