@@ -5,3 +5,5 @@ services:
     image: dkr.gtl.net/dkr/devops-tools-helm-job-runner
     volumes:
     - .:/var/workspace:rw
+    - ~/.aws:/home/default/.aws:ro
+    - ~/.kube:/home/default/.kube:ro
