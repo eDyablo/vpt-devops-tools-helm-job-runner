@@ -45,11 +45,15 @@ RUN addgroup -S ${CONTAINER_USER_GROUP} \
 USER ${CONTAINER_USER}:${CONTAINER_USER_GROUP}
 
 ENV \
-  HELM_DIFF_VERSION=latest
+  HELM_DIFF_VERSION=latest \
+  HELM_PUSHARTIFACTORY_VERSION=1.0.2
 
 RUN \
   echo "Installing diff helm plugin version ${HELM_DIFF_VERSION:-latest}" \
     && helm plugin install https://github.com/databus23/helm-diff \
-      --version=${HELM_DIFF_VERSION##latest}
+      --version=${HELM_DIFF_VERSION##latest} \
+  && echo "Installing push-artifactory helm plugin version ${HELM_PUSHARTIFACTORY_VERSION}" \
+    && helm plugin install https://github.com/belitre/helm-push-artifactory-plugin \
+      --version=${HELM_PUSHARTIFACTORY_VERSION}
 
 WORKDIR /var/workspace
