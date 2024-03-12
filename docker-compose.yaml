@@ -2,8 +2,11 @@ services:
   runner:
     build:
       context: .
+    environment:
+      AWS_PROFILE: $AWS_PROFILE
     image: dkr.gtl.net/dkr/devops-tools-helm-job-runner
     volumes:
     - .:/var/workspace:rw
     - ~/.aws:/home/default/.aws:ro
     - ~/.kube:/home/default/.kube:ro
+    working_dir: /var/workspace
